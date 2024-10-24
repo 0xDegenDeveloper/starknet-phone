@@ -6,10 +6,11 @@ use contracts::account::{IStarknetPhoneAccountDispatcher, IStarknetPhoneAccountD
 #[test]
 fn test_deploy() {
     let contract = declare("StarknetPhoneAccount");
-    let contract_address = contract.deploy(@array![]).unwrap();
+    let c_pub_key = 'pub_key';
+    let contract_address = contract.deploy(@array![c_pub_key]).unwrap();
 
     let dispatcher = IStarknetPhoneAccountDispatcher { contract_address };
 
     let pub_key = dispatcher.get_public_key();
-    assert(pub_key == 0x0, 'balance == 0');
+    assert(pub_key == c_pub_key, 'balance == 0');
 }
